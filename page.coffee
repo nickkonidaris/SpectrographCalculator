@@ -203,6 +203,7 @@ renderPage = ->
     ctx.lineTo(gOrig[0]+tanTilt*beam/2, gOrig[1]+beam/2*anamorph)
     ctx.stroke()
 
+
     drawCamField = (angle) ->
         offX = beam/2*Math.sin(angle/57.3)
         dX = pr*Math.cos(angle/57.3)
@@ -248,7 +249,7 @@ renderPage = ->
         NR: '(lend-lstart)/dlambda'
         dFFOV: 'NR*dthetaw*57.3'
         grotate: 'grotate'
-        pr: '(anamorph*beam/2)/Math.tan((-beamFFOV/2 - dFFOV/2 + 2*grotate)/(2*57.3))'
+        pr: '(anamorph*beam/2)/Math.tan((-beamFFOV - dFFOV/2 + 2*grotate)/(2*57.3))'
         anamorph: '1/Math.cos(2*grotate/57.3)'
     cameraSolver: new Solver
         cFFOV: 'Math.sqrt(dFFOV*dFFOV + beamFFOV * beamFFOV)'
