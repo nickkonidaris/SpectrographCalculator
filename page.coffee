@@ -14,10 +14,10 @@ renderPage = ->
         TELESCOPE:
             tdiam:
                 name: "Telescope diameter [m]"
-                default: 10
+                default: 5
             tfratio:
                 name: "Telescope focal ratio []"
-                default: 15
+                default: 16
             tefl:
                 name: "Telescope focal length [m]"
             tscale:
@@ -25,13 +25,13 @@ renderPage = ->
         COLLIMATOR:
             beam:
                 name: "Beam diameter [mm]"
-                default: 141
+                default: 145
             slitwidth:
                 name: "Slit width [as]"
                 default: 1
             slitlength:
                 name: "FFOV [arcmin] (~ slit length)"
-                default: .1
+                default: 12
             slitlengthmm:
                 name: "FFOV [mm] (~ slit length)"
             cf:
@@ -44,13 +44,13 @@ renderPage = ->
         DISPERSER:
             density:
                 name: "Ruling density [lines/mm]"
-                default: 1
+                default: 300
             order:
                 name: "Grating order []"
                 default: 1
             l0:
                 name: "&lambda;<sub>center</sub> [&#8491;]"
-                default: 5000
+                default: 7000
             lstart:
                 name: "&lambda;<sub>start</sub> [&#8491;]"
             lend:
@@ -76,7 +76,7 @@ renderPage = ->
                 name: "Camera ffov [&deg;]"
             fnum:
                 name: "Camera filled f/# []"
-                default: 2.0
+                default: 2.1
             camefl:
                 name: "Camera focal length [mm]"
             mfnum:
@@ -226,7 +226,7 @@ renderPage = ->
 @solvers =
     telescopeSolver : new Solver
        tdiam: 'tdiam'
-       tfratio: 'tscale*206265/1000/tdiam'
+       tfratio: 'tfratio'
        tscale: 'tdiam * tfratio / 206265. * 1000.0'
        tefl: 'tscale*206265/1000'
     collimatorSolver : new Solver
@@ -238,7 +238,6 @@ renderPage = ->
         beamFFOV: 'tdiam/(beam/1000.) * slitlength/60.'
         dthetaw: 'slitwidth * tscale / cf'
     disperserSolver: new Solver
-        dthetaw: 'dthetaw'
         order: 'order'
         density: 'density'
         l0: 'l0'
@@ -263,9 +262,9 @@ renderPage = ->
         dslitwidth: 'cslitwidth/pixelsize'
         speclenpix: 'speclen/(pixelsize/1000)'
         pixwidth: '1/dslitwidth'
-        pixheight: 'anamorph/dslitwidth'
+        pixheight: '1/(dslitwidth * anamorph)'
     systemSolver: new Solver
-        effarea: '0.3*3.14*Math.pow(tdiam/2*.8, 2)*1e4'
+        effarea: '0.3*3.14*Math.pow(tdiam/2, 2) * 0.9 * 1e4'
         pixarea: 'pixwidth * pixheight'
         bandwidth: 'dlambda/dslitwidth'
         pthpt: 'pixarea*effarea*bandwidth'
