@@ -3,25 +3,27 @@
 <head>
     <meta charset="utf-8">
     <title>Konidaris' Spectrograph Calculator</title>
+        <style>
+        label { float: left; width: 350px }
+        sup { vertical-align: top; font-size: 0.6em; }
+        sub { vertical-align: bottom; font-size: 0.6em; }
+        h2 { margin-top: 2px; margin-bottom: 5px; }
+        #preamble { width: 50%; }
+    </style>
     <a href="http://nickkonidaris.com/2015/01/06/spectrograph-0th-order-calculations/">Konidaris'</a> Spectrograph Calculator<br>
     See the Coffeescript code here:<br>
     <a href=https://github.com/nickkonidaris/SpectrographCalculator>https://github.com/nickkonidaris/SpectrographCalculator</a>
     <p/>
     
     <h3>How to use?</h3>
-    <div width=50%>
+    <div id="preamble">
 First, adjust the parameters that are already preset (e.g., telescope diameter, telescope focal ratio, beam diameter, etc). 
 The compute button will calculate all other parameters in the form. If you're curious how a number is computed, place your
 mouse cursor over the variable name, the mouseover box will present the exact javascript code used to compute a variable.
 The "pixel system throughput" times a source's spectral irradiance (erg s<sup>-1</sup>cm<sup>-2</sup>Angstrom<sup>-1</sup>)
 will yield the total erg/s delivered in a pixel from the source. Such a number is valuable for computing (say) S/N ratios.
     </div>
-    <style>
-        label { float: left; width: 350px }
-        sup { vertical-align: top; font-size: 0.6em; }
-        sub { vertical-align: bottom; font-size: 0.6em; }
-        h2 { margin-top: 2px; margin-bottom: 5px; }
-    </style>
+
 </head>
 <body>
     <input type="button" value="Compute" id="handleSolve" onclick="doSolve();"/>
